@@ -1,2 +1,0 @@
-/home/thom/Downloads/Ex_Files_Test_Driven_Development_C/Exercise Files/code_samples/code_samples/fizzbuzz_kata/build/CMakeFiles/rebuild_cache.dir
-/home/thom/Downloads/Ex_Files_Test_Driven_Development_C/Exercise Files/code_samples/code_samples/fizzbuzz_kata/build/CMakeFiles/edit_cache.dir
