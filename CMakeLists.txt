@@ -1,5 +1,10 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(google-test-examples VERSION 0.1.0)
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-add_subdirectory(fizzbuzz_kata)
+cmake_minimum_required(VERSION 3.14)
+project(fizzbuzz_kata)
+set(CMAKE_CXX_STANDARD 11) # GoogleTest requires at least C++11
+
+
+include_directories(fizzbuzz_kata/external/googletest/googletest/include)
+link_directories(fizzbuzz_kata/external/googletest/build/lib)
+
+add_executable(fizzbuzzer fizzbuzz_kata/TestFizzBuzz.cpp)
+target_link_libraries(fizzbuzzer gtest gtest_main)
