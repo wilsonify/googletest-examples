@@ -1,22 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
 project(fizzbuzz_kata)
+set(CMAKE_CXX_STANDARD 11) # GoogleTest requires at least C++11
 
-# GoogleTest requires at least C++11
-set(CMAKE_CXX_STANDARD 11)
 
-include(external/googletest/googletest/include)
-include(external/googletest/googlemock/include)
+include_directories(external/googletest/googletest/include)
+link_directories(external/googletest/build/lib)
 
-enable_testing()
-
-add_executable(
-  hello_test
-  hello_test.cc
-)
-target_link_libraries(
-  hello_test
-  gtest_main
-)
-
-include(GoogleTest)
-gtest_discover_tests(hello_test)
+add_executable(fizzbuzz_kata TestFizzBuzz.cpp)
+target_link_libraries(fizzbuzz_kata gtest gtest_main)
