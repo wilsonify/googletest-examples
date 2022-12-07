@@ -5,3 +5,6 @@ external/googletest/googletest/include/gtest/gtest.h:
 
 clean:
 	rm -rf build
+
+all:
+	mkdir build && cd build && cmake .. && make && ctest && cpack
