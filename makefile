@@ -7,4 +7,4 @@ clean:
 	rm -rf build
 
 all:
-	mkdir build && cd build && cmake .. && make && ctest && cpack
+	mkdir -p build && cd build && cmake .. && make && ctest && cpack

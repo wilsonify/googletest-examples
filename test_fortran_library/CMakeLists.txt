@@ -1,5 +1,0 @@
-
-add_executable(testfortranlibray TestFortranLibray.cpp)
-target_link_libraries(testfortranlibray mylib)
-target_link_libraries(testfortranlibray lapack)
-target_link_libraries(testfortranlibray gtest gtest_main)

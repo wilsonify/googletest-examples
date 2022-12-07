@@ -1,0 +1,1 @@
+std::string fizzBuzz(int value);

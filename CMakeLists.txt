@@ -1,15 +1,43 @@
 cmake_minimum_required(VERSION 3.14)
 project(googletest-examples LANGUAGES Fortran CXX)
+
+# The version number.
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+
 set(CMAKE_CXX_STANDARD 11) # GoogleTest requires at least C++11
 set(CMAKE_Fortran_Compiler gfortran)
 
+SET(CMAKE_CXX_FLAGS="-g -O0 -Wall -W -Wshadow -Wunused-variable -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage")
+SET(CMAKE_C_FLAGS="-g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
+SET(CMAKE_SHARED_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
+SET(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
+
+#build the test runner
 include_directories(external/googletest/googletest/include)
 add_subdirectory(external/googletest)
 link_directories(external/googletest/build/lib)
 
-add_subdirectory(fizzbuzz_kata)
-add_subdirectory(fortranlibrary)
+# build a shared library
+include_directories(fizz-buzz-library)
+FILE(GLOB fblSources fizz-buzz-library/*.cpp)
+add_library(fizz-buzz-library SHARED ${fblSources})
+link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+# build a test
+add_executable(testfizzbuzzer fizzbuzz_kata/TestFizzBuzz.cpp fizzbuzz_kata/hello_test.cpp)
+target_link_libraries(testfizzbuzzer gtest gtest_main fizz-buzz-library)
+
+# build a fortran library
+add_library(mylib SHARED fortranlibrary/mylib.f90)
+set_target_properties(mylib PROPERTIES LINKER_LANGUAGE Fortran)
+link_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+# build a test of a fortran library
+add_executable(testfortranlibray test_fortran_library/TestFortranLibrary.cpp)
+target_link_libraries(testfortranlibray mylib)
+target_link_libraries(testfortranlibray lapack)
+target_link_libraries(testfortranlibray gtest gtest_main)
 
 # Specify CMake root location
 #include(${CMAKE_ROOT}/Modules/CMakeDetermineCompiler.cmake)
@@ -19,8 +47,6 @@ add_subdirectory(fortranlibrary)
 #set(CMAKE_CXX_STANDARD 11)
 #set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_FLAGS  -std=c++11)
-
-
 
 # Setup file extension preferences
 # set(FORT_EXT .F90)

@@ -1,0 +1,1 @@
+bool isMultiple(int value, int base);

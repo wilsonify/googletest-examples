@@ -1,0 +1,1 @@
+void checkFizzBuzz(int value, std::string expectedResult);
