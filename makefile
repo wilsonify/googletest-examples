@@ -34,3 +34,8 @@ build/googletest-examples-builder.txt: build/googletest-examples-base.txt
 build/googletest-examples-image.txt: build/googletest-examples-builder.txt
 	docker build -t googletest-examples -f Dockerfile . && $(call ver_file, $@)
 
+docker-run: build/googletest-examples-image.txt
+	docker run --rm --name googletest-examples googletest-examples:latest
+
+docker/build/testfizzbuzzer: build/googletest-examples-builder.txt
+	docker run --rm --name googletest-examples-builder -u 1000:1000 -v $(shell pwd):/usr/src/app googletest-examples-builder:latest make all

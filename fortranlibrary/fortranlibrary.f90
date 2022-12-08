@@ -1,14 +1,10 @@
 module mymodule
    use iso_c_binding
    implicit none
-   integer, parameter :: dp = selected_real_kind(15, 307)
-
 contains
-
-   real(kind=dp)  function binomial(n, k) result(coefficient) &
+   real(kind=selected_real_kind(15, 307)) function binomial(n, k) result(coefficient) &
       bind (C, name="binomial")
-      implicit none
-      integer, intent(in) :: n, k
+      integer(kind=C_INT), intent(in) :: n, k
       integer :: numerator, i
 
       if (k == 0) then
@@ -25,7 +21,7 @@ contains
 
    subroutine echo(a, b) &
       bind (C, name="echo")
-      integer, intent(in) :: a, b
+      INTEGER(kind=C_INT), intent(in) :: a,b
       print*,'a=',a
       print*,'b=',b
    end
