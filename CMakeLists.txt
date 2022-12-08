@@ -44,10 +44,16 @@ FILE(GLOB testfortranlibraySources fortran-library-kata/*.cpp)
 add_executable(testfortranlibray ${testfortranlibraySources})
 target_link_libraries(testfortranlibray fortranlibrary gtest gtest_main)
 
+# build a shared library
+include_directories(checkout-library)
+FILE(GLOB checkoutSources checkout-library/*.cpp)
+add_library(checkout-library SHARED ${checkoutSources})
+link_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 # build a test
 FILE(GLOB testcheckoutSources checkout-kata/*.cpp)
 add_executable(testcheckout ${testcheckoutSources})
-target_link_libraries(testcheckout gtest gtest_main)
+target_link_libraries(testcheckout gtest gtest_main checkout-library)
 
 
 # Tests
