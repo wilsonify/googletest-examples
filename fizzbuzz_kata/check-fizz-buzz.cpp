@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "fizz-buzz-library.hpp"
 
 void checkFizzBuzz(int value, std::string expectedResult)
 {
