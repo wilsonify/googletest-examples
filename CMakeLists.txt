@@ -42,5 +42,5 @@ link_directories(${CMAKE_CURRENT_BINARY_DIR})
 #build a test of a fortran library
 FILE(GLOB testfortranlibraySources test_fortran_library/*.cpp)
 add_executable(testfortranlibray ${testfortranlibraySources})
-target_link_libraries(testfortranlibray fortranlibrary lapack gtest gtest_main)
+target_link_libraries(testfortranlibray fortranlibrary gtest gtest_main)
 
