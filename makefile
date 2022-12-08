@@ -8,12 +8,14 @@ dist/version.txt:
 	mkdir -p build && $(call ver_file, $@)
 
 external/googletest/googletest/include/gtest/gtest.h:
-	git submodule update --init
+	git submodule update --init --recursive
+
+gtest: external/googletest/googletest/include/gtest/gtest.h
 
 clean:
 	rm -rf build
 
-build/Makefile: build/version.txt
+build/Makefile: build/version.txt gtest
 	cd build && cmake ..
 
 build/testfizzbuzzer:  build/Makefile
