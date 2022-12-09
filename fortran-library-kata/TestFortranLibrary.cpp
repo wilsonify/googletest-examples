@@ -1,10 +1,6 @@
 #include <gtest/gtest.h>
+#include "fortran-library.h"
 
-extern "C"
-{
-   double binomial(int *, int *);
-   void echo(int *, int *);
-}
 
 // Tests for myLib
 

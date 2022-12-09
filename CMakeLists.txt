@@ -33,7 +33,7 @@ add_executable(testfizzbuzzer ${testfizzbuzzerSources} )
 target_link_libraries(testfizzbuzzer gtest gtest_main fizz-buzz-library)
 
 # build a fortran library
-include_directories(fortranlibrary)
+include_directories(fortran-library)
 FILE(GLOB fortranlibrarySources fortran-library/*.f90)
 add_library(fortranlibrary SHARED ${fortranlibrarySources})
 set_target_properties(fortranlibrary PROPERTIES LINKER_LANGUAGE Fortran)
@@ -42,7 +42,7 @@ link_directories(${CMAKE_CURRENT_BINARY_DIR})
 #build a test of a fortran library
 FILE(GLOB testfortranlibraySources fortran-library-kata/*.cpp)
 add_executable(testfortranlibray ${testfortranlibraySources})
-target_link_libraries(testfortranlibray fortranlibrary gtest gtest_main)
+target_link_libraries(testfortranlibray gtest gtest_main fortranlibrary)
 
 # build a shared library
 include_directories(checkout-library)
